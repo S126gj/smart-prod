@@ -1,0 +1,166 @@
+spring:
+  datasource:
+#    # 开启分表模式
+#    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+#    url: jdbc:shardingsphere:classpath:sharding/sharding-prod.yaml
+    db-type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/smart_prod?characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&stringtype=unspecified
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+      #连接超时时间
+      timeout: 8000ms
+      jedis:
+        pool:
+          max-active: 50
+
+file:
+  # minio 文件上传
+  minio:
+    url: http://localhost:9000
+    accessKey: minioadmin
+    secretKey: minioadmin
+    bucketName: smart-prod
+  # oss 文件上传
+  oss:
+
+############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: Authorization
+  # token有效期，单位s  -1 永不超时
+  timeout: -1
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  active-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # 同一账号最大登录数量，-1代表不限 （只有在 isConcurrent=true，isShare=false 时此配置才有效）
+  max-login-count: 12
+  # token风格
+  token-style: tik
+  # 是否输出操作日志
+  is-log: false
+  sign:
+    # API 接口签名秘钥
+    secret-key: qwoeuidyaskqwhkdq
+
+# xxljob  此项目暂时未启用xxljob，如若需要可自行开启
+xxl:
+  job:
+    # 是否启用 Y 启用，N禁用
+    enable: N
+    accessToken: token
+    admin:
+      addresses: http://localhost:8080/xxl-job-admin
+    executor:
+      appname: smart-prod-xxl-job-executor
+      # 尽量不要指定address。不能注掉，否则报错
+      address:
+      ip: localhost
+      port: 7010
+      logpath: /Users/shenguoji/日志/xxl-job/jobhandler
+      logretentiondays: 30
+
+# 短信
+sms:
+  # 阿里云短信服务
+  ali:
+    accessKeyId:
+    accessKeySecret:
+    endpoint:
+    signName:
+    loginVerifyTemplateId:
+  # 腾讯短信服务
+  tx:
+    secretId:
+    secretKey:
+    endpoint:
+    region:
+    sdkAppId:
+    signName:
+    # 登录验证码短信模板
+    loginVerifyTemplateId:
+  # 容联云短信服务
+  rly:
+    serverIp:
+    serverPort:
+    accountSId:
+    accountToken:
+    appId:
+    # 登录验证码短信模板
+    loginVerifyTemplateId:
+
+# springdoc-openapi
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan:
+        - com.smart.prod.mbg.controller
+        - com.smart.prod.file.controller
+        - com.smart.prod.core.column.controller
+        - com.smart.prod.core.core.controller
+        - com.smart.prod.core.customer.controller
+# knife4j
+knife4j:
+  enable: false
+  setting:
+    language: zh_cn
+
+# forest 默认域名配置
+forest:
+  variables:
+    # 可指定多个client
+    apiUrl: http://127.0.0.1:8899
+  ## 日志总开关，打开/关闭Forest请求/响应日志（默认为 true）
+  log-enabled: false
+  ## 打开/关闭Forest请求日志（默认为 true）
+  log-request: false
+  ## 打开/关闭Forest响应状态日志（默认为 true）
+  log-response-status: false
+  ## 打开/关闭Forest响应内容日志（默认为 false）
+  log-response-content: false
+  # 超时时间 1分钟
+  timeout: 60000
+
+# elasticsearch
+easy-es:
+  enable: false  # 需要注意的是，这里关闭easy-es只会让你的es mapper失效，代码极有可能报错，请仔细检查
+  address: localhost:9200
+  username: elastic
+  password:
+  banner: false
+  global-config:
+    # 关闭dsl日志
+    print-dsl: false
+logging:
+  level:
+    org:
+      # 关闭es日志
+      elasticsearch: OFF
+
+# rsa 密钥
+rsa:
+  privateKey: ""
+  publicKey: ""
+
+# aes 对称加密密钥
+aes:
+  secret: ""
+
+# 数采判断待机时长(分)
+dataAcquisition:
+  awaitTime: 1

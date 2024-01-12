@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 父模块版本 -->
+    <groupId>com.smart.prod</groupId>
+    <artifactId>smart-prod</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>smart-prod</name>
+    <description>smart-prod</description>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>smart-prod-common</module>
+        <module>smart-prod-core</module>
+        <module>smart-prod-es</module>
+        <module>smart-prod-mbg</module>
+        <module>smart-prod-file</module>
+        <module>smart-prod-forest</module>
+        <module>smart-prod-sms</module>
+        <module>smart-prod-xxljob</module>
+    </modules>
+
+    <!-- springboot 版本 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.0</version>
+    </parent>
+
+    <!-- 依赖包版本管理 -->
+    <properties>
+        <spring.version>3.1.0</spring.version>
+        <java.version>17</java.version>
+        <springdoc.version>2.0.0-M3</springdoc.version>
+        <jsr250.version>1.0</jsr250.version>
+        <validation.version>2.0.1.Final</validation.version>
+        <knife4j.version>4.1.0</knife4j.version>
+        <openai.version>1.7.0</openai.version>
+        <redis.version>3.0.6</redis.version>
+        <mysql.version>8.0.31</mysql.version>
+        <druid.version>1.1.20</druid.version>
+        <fastjson.version>2.0.31</fastjson.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <!-- 此解析器版本与mybatis版本对应，请勿修改，否则会出现租户解析sql报错 -->
+        <jsqlparser.version>4.2</jsqlparser.version>
+        <spring.freemarker.version>2.6.6</spring.freemarker.version>
+        <mybatis-plus-generator.version>3.5.3</mybatis-plus-generator.version>
+        <minio.version>8.5.2</minio.version>
+        <servlet-api.version>6.0.0</servlet-api.version>
+        <hutool.version>5.8.11</hutool.version>
+        <pinyin.version>2.5.0</pinyin.version>
+        <guava.version>30.1.1-jre</guava.version>
+        <spring-data-common.version>3.0.5</spring-data-common.version>
+        <sa-token.version>1.35.0.RC</sa-token.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <alibabacloud-dysmsapi.version>2.0.24</alibabacloud-dysmsapi.version>
+        <!-- 腾讯sdk: maven仓库中显示的4.0.11是废弃版本，我们已经联系maven官方删除jar包，但maven索引无法清除，请勿使用; -->
+        <tencentcloud-sdk.version>3.1.597</tencentcloud-sdk.version>
+        <rly-sdk.version>1.0.4</rly-sdk.version>
+        <xxljob.version>2.3.1</xxljob.version>
+        <forest.version>1.5.32</forest.version>
+        <easy-excel.version>3.3.2</easy-excel.version>
+        <poi.version>5.2.3</poi.version>
+        <google.zxing.javase>3.3.0</google.zxing.javase>
+        <google.zxing.core>3.3.0</google.zxing.core>
+        <commons-fileupload>1.5</commons-fileupload>
+        <easy-es.version>2.0.0-beta3</easy-es.version>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
+        <shardingsphere.version>5.4.0</shardingsphere.version>
+        <jaxb.version>2.3.1</jaxb.version>
+        <jaxb-core.version>2.3.0</jaxb-core.version>
+        <smart-prod-common.version>1.0-SNAPSHOT</smart-prod-common.version>
+        <smart-prod-es.version>1.0-SNAPSHOT</smart-prod-es.version>
+        <smart-prod-mbg.version>1.0-SNAPSHOT</smart-prod-mbg.version>
+        <smart-prod-file.version>1.0-SNAPSHOT</smart-prod-file.version>
+        <smart-prod-forest.version>1.0-SNAPSHOT</smart-prod-forest.version>
+        <smart-prod-sms.version>1.0-SNAPSHOT</smart-prod-sms.version>
+        <smart-prod-xxljob.version>1.0-SNAPSHOT</smart-prod-xxljob.version>
+        <!-- 跳过测试 -->
+        <skipTests>true</skipTests>
+    </properties>
+
+    <dependencies>
+        <!-- hutool -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <!-- hutool 拼音工具包 -->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>${pinyin.version}</version>
+        </dependency>
+        <!-- guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 添加 Javax Annotation -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>${jsr250.version}</version>
+        </dependency>
+        <!-- jsr303 校验 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>${spring-data-common.version}</version>
+        </dependency>
+        <!-- aop 切面 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- 去除重复es依赖，避免与easy-es冲突 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.elasticsearch.client</groupId>
+                    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.elasticsearch</groupId>
+                    <artifactId>elasticsearch</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- google二维码生成 -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${google.zxing.javase}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${google.zxing.core}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- common 模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-common</artifactId>
+                <version>${smart-prod-common.version}</version>
+            </dependency>
+            <!-- es 模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-es</artifactId>
+                <version>${smart-prod-es.version}</version>
+            </dependency>
+            <!-- mybatis 模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-mbg</artifactId>
+                <version>${smart-prod-mbg.version}</version>
+            </dependency>
+            <!-- file 文件模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-file</artifactId>
+                <version>${smart-prod-file.version}</version>
+            </dependency>
+            <!-- forest 三方对接模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-forest</artifactId>
+                <version>${smart-prod-forest.version}</version>
+            </dependency>
+            <!-- sms 短信模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-sms</artifactId>
+                <version>${smart-prod-sms.version}</version>
+            </dependency>
+            <!-- xxljob 定时任务模块 -->
+            <dependency>
+                <groupId>com.smart.prod</groupId>
+                <artifactId>smart-prod-xxljob</artifactId>
+                <version>${smart-prod-xxljob.version}</version>
+            </dependency>
+            <!-- minio -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${servlet-api.version}</version>
+            </dependency>
+            <!-- redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
+            </dependency>
+            <!-- kenif4j -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- openai -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${openai.version}</version>
+            </dependency>
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--mapStruct依赖-->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <exclusions>
+                    <!-- 解决jsqlparser 依赖版本冲突 -->
+                    <exclusion>
+                        <artifactId>jsqlparser</artifactId>
+                        <groupId>com.github.jsqlparser</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>${jsqlparser.version}</version>
+            </dependency>
+            <!-- 模版引擎 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-freemarker</artifactId>
+                <version>${spring.freemarker.version}</version>
+            </dependency>
+            <!-- mybatis 代码生成 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus-generator.version}</version>
+            </dependency>
+            <!-- sa-token -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot3-starter</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <!-- Sa-Token 整合 Redis （使用jackson序列化方式） -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>${sa-token.version}</version>
+            </dependency>
+            <!-- 阿里云短信sdk -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>alibabacloud-dysmsapi20170525</artifactId>
+                <version>${alibabacloud-dysmsapi.version}</version>
+            </dependency>
+            <!-- 腾讯云短信sdk -->
+            <dependency>
+                <groupId>com.tencentcloudapi</groupId>
+                <artifactId>tencentcloud-sdk-java</artifactId>
+                <version>${tencentcloud-sdk.version}</version>
+            </dependency>
+            <!-- 容联云短信sdk -->
+            <dependency>
+                <groupId>com.cloopen</groupId>
+                <artifactId>java-sms-sdk</artifactId>
+                <version>${rly-sdk.version}</version>
+            </dependency>
+            <!--xxljob-->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxljob.version}</version>
+            </dependency>
+            <!--forest-->
+            <dependency>
+                <groupId>com.dtflys.forest</groupId>
+                <artifactId>forest-spring-boot3-starter</artifactId>
+                <version>${forest.version}</version>
+            </dependency>
+            <!--easy-excel-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easy-excel.version}</version>
+            </dependency>
+            <!--poi-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <!-- elasticsearch -->
+            <dependency>
+                <groupId>org.dromara.easy-es</groupId>
+                <artifactId>easy-es-boot-starter</artifactId>
+                <version>${easy-es.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
+            </dependency>
+            <!--sharding-jdbc-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-jdbc-core</artifactId>
+                <version>${shardingsphere.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>${jaxb.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>${jaxb-core.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <!--idea默认只编译src/main/resources下的文件，这里是让它也能编译src/main/java下的xml文件-->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.yaml</include>
+                    <include>**/*.db</include>
+                    <include>**/*.txt</include>
+                    <include>**/*.sql</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>
