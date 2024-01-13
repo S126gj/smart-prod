@@ -101,6 +101,9 @@ CREATE TABLE `sys_menu`
   COLLATE = utf8mb4_0900_ai_ci
   ROW_FORMAT = COMPACT COMMENT ='系统菜单表';
 
+INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', 1, 'system', '/system', 'dashboard', '系统管理', 0, 0, 'Layout', 0, now(), now()),
+('2', '1', '菜单管理', 2, 'SystemMenu', 'SystemMenu', 'tree', '菜单管理', 0, 1, 'system/SystemMenu', 0, now(), now());
+
 DROP TABLE IF EXISTS sys_role;
 CREATE TABLE `sys_role`
 (
@@ -154,30 +157,7 @@ CREATE TABLE `sys_role_menu`
 -- generate_snowflake_id() 为自定义函数，需要先执行 /doc/layout/1 生成雪花算法  的sql文件
 INSERT INTO `sys_role_menu` (`id`, `role_id`, `menu_id`)
 VALUES (generate_snowflake_id(), '1', '1'),
-       (generate_snowflake_id(), '1', '2'),
-       (generate_snowflake_id(), '1', '3'),
-       (generate_snowflake_id(), '1', '4'),
-       (generate_snowflake_id(), '1', '5'),
-       (generate_snowflake_id(), '1', '6'),
-       (generate_snowflake_id(), '1', '7'),
-       (generate_snowflake_id(), '1', '8'),
-       (generate_snowflake_id(), '1', '9'),
-       (generate_snowflake_id(), '1', '10'),
-       (generate_snowflake_id(), '1', '11'),
-       (generate_snowflake_id(), '1', '12'),
-       (generate_snowflake_id(), '1', '13'),
-       (generate_snowflake_id(), '1', '14'),
-       (generate_snowflake_id(), '1', '15'),
-       (generate_snowflake_id(), '1', '16'),
-       (generate_snowflake_id(), '1', '17'),
-       (generate_snowflake_id(), '1', '18'),
-       (generate_snowflake_id(), '1', '20'),
-       (generate_snowflake_id(), '1', '21'),
-       (generate_snowflake_id(), '1', '22'),
-       (generate_snowflake_id(), '1', '23'),
-       (generate_snowflake_id(), '1', '24'),
-       (generate_snowflake_id(), '1', '25'),
-       (generate_snowflake_id(), '1', '26');
+       (generate_snowflake_id(), '1', '2');
 
 DROP TABLE IF EXISTS sys_file;
 CREATE TABLE `sys_file`
