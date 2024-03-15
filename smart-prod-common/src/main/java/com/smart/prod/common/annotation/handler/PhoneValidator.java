@@ -1,5 +1,6 @@
 package com.smart.prod.common.annotation.handler;
 
+import cn.hutool.core.lang.Validator;
 import com.smart.prod.common.annotation.Phone;
 import com.smart.prod.common.constanst.Constanst;
 import com.smart.prod.common.utils.StringUtil;
@@ -21,10 +22,10 @@ public class PhoneValidator implements ConstraintValidator<Phone, String> {
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String phone, ConstraintValidatorContext constraintValidatorContext) {
         boolean matches = true;
-        if (StringUtil.isNotBlank(value)) {
-            matches = pattern.matcher(value).matches();
+        if (StringUtil.isNotBlank(phone)) {
+            matches = Validator.isMobile(phone);
         }
         return matches;
     }
