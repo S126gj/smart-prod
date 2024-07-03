@@ -2,16 +2,14 @@ package com.smart.prod.mbg.service.impl;
 
 import cn.dev33.satoken.secure.BCrypt;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.smart.prod.common.constanst.Constanst;
 import com.smart.prod.common.exception.Checker;
 import com.smart.prod.common.exception.Errors;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.smart.prod.mbg.domain.criteria.UserCriteria;
 import com.smart.prod.mbg.domain.dto.UserCreateParam;
 import com.smart.prod.mbg.domain.dto.UserRegisterParam;
@@ -90,7 +88,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         // 校验用户名是否重复
         checkUsername(user.getUsername());
         // 若密码为空则给默认密码
-        String password = StringUtil.isNotBlank(user.getPassword()) ? BCrypt.hashpw(user.getPassword()) : BCrypt.hashpw(
+        String password = Str.isNotBlank(user.getPassword()) ? BCrypt.hashpw(user.getPassword()) : BCrypt.hashpw(
             Constanst.DEFAULT_PASSWORD);
         user.setPassword(password);
         baseMapper.insert(user);

@@ -22,13 +22,6 @@ public class DateUtil {
     public final static SimpleDateFormat MMDDHHMM = new SimpleDateFormat("MM/dd HH:mm");
     public final static Calendar calendar = Calendar.getInstance();
 
-
-
-
-
-
-
-
     /**
      * 获取年份
      *
@@ -46,7 +39,6 @@ public class DateUtil {
     public static String month(Date date) {
         return new SimpleDateFormat("MM").format(date);
     }
-
 
     public static Date parseNoYear(Date date) throws ParseException {
         SimpleDateFormat sdf1 = new SimpleDateFormat("MM-dd hh:mm:ss");

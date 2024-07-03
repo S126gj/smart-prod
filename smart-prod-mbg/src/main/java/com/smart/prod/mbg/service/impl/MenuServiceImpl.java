@@ -45,7 +45,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         List<Menu> menuList = new LambdaQueryChainWrapper<>(baseMapper).orderByAsc(Menu::getSort).list();
         List<MenuNode> result = menuList.stream()
             .filter(menu -> menu.getPid().equals("0"))
-            .map(menu -> covertMenuNode(menu, menuList))
+            .map(menu -> covertMenuNodeWithButton(menu, menuList))
             .collect(Collectors.toList());
         return result;
     }
@@ -55,7 +55,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         List<Menu> menuList = roleMenuService.getMenuListByRoleId(roleId);
         List<MenuNode> result = menuList.stream()
             .filter(menu -> menu.getPid().equals("0"))
-            .map(menu -> covertMenuNode(menu, menuList))
+            .map(menu -> covertMenuNodeWithButton(menu, menuList))
             .collect(Collectors.toList());
         return result;
     }
@@ -107,7 +107,26 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         BeanUtils.copyProperties(menu, node);
         List<MenuNode> children = menuList.stream()
             .filter(subMenu -> subMenu.getPid().equals(menu.getId()))
+            // 过滤掉按钮权限
+            .filter(subMenu -> !subMenu.getType().equals(2))
             .map(subMenu -> covertMenuNode(subMenu, menuList))
+            .collect(Collectors.toList());
+        node.setChildren(children);
+        return node;
+    }
+
+    /**
+     * 递归填充菜单
+     * @param menu
+     * @param menuList
+     * @return
+     */
+    private MenuNode covertMenuNodeWithButton(Menu menu, List<Menu> menuList) {
+        MenuNode node = new MenuNode();
+        BeanUtils.copyProperties(menu, node);
+        List<MenuNode> children = menuList.stream()
+            .filter(subMenu -> subMenu.getPid().equals(menu.getId()))
+            .map(subMenu -> covertMenuNodeWithButton(subMenu, menuList))
             .collect(Collectors.toList());
         node.setChildren(children);
         return node;

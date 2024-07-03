@@ -2,7 +2,7 @@ package com.smart.prod.mbg.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.smart.prod.mbg.domain.entity.Menu;
 import com.smart.prod.mbg.domain.entity.Role;
 import com.smart.prod.mbg.domain.entity.RoleMenu;
@@ -35,7 +35,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 
     @Override
     public List<Menu> getMenuListByUserId(String userId) {
-        if (StringUtil.isBlank(userId)) {
+        if (Str.isBlank(userId)) {
             return null;
         }
         return menuMapper.getMenuList(userId);
@@ -43,7 +43,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 
     @Override
     public List<Role> getRoleListByUserId(String userId) {
-        if (StringUtil.isBlank(userId)) {
+        if (Str.isBlank(userId)) {
             return null;
         }
         return roleMapper.getRoleList(userId);
@@ -51,7 +51,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 
     @Override
     public List<Menu> getMenuListByRoleId(String roleId) {
-        if (StringUtil.isBlank(roleId)) {
+        if (Str.isBlank(roleId)) {
             return null;
         }
         return baseMapper.getMenuListByRoleId(roleId);

@@ -6,7 +6,7 @@ import cn.hutool.core.net.url.UrlBuilder;
 import cn.hutool.core.net.url.UrlPath;
 import cn.hutool.core.util.CharsetUtil;
 import com.smart.prod.common.exception.BIZException;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.smart.prod.file.component.minio.config.MinioTemplate;
 import com.smart.prod.file.component.minio.service.MinioService;
 import lombok.RequiredArgsConstructor;
@@ -176,7 +176,7 @@ public class MinioServiceImpl implements MinioService {
     public void delete(String filePath) {
         String bucketName = minioTemplate.getBucketName(DEFAULT_DB);
         String path = "";
-        if (StringUtil.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
+        if (Str.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
             path = filePath.split(bucketName + "/")[1];
             System.out.println(path);
         }
@@ -279,7 +279,7 @@ public class MinioServiceImpl implements MinioService {
         String bucketName = minioTemplate.getBucketName(DEFAULT_DB);
         UrlPath urlPath = null;
         String[] fps = null;
-        if (StringUtil.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
+        if (Str.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
             fps = filePath.split("/" + bucketName);
             try {
                 UrlBuilder builder = UrlBuilder.ofHttp(filePath, CharsetUtil.CHARSET_UTF_8);
@@ -303,7 +303,7 @@ public class MinioServiceImpl implements MinioService {
     private String parseUrl(String bucketName, String filePath) {
         UrlPath urlPath = null;
         String[] fps = null;
-        if (StringUtil.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
+        if (Str.isNotEmpty(filePath) && filePath.indexOf(bucketName) > -1) {
             fps = filePath.split("/" + bucketName);
             try {
                 UrlBuilder builder = UrlBuilder.ofHttp(filePath, CharsetUtil.CHARSET_UTF_8);

@@ -1,9 +1,8 @@
 package com.smart.prod.mbg.auth.handler;
 
 import cn.dev33.satoken.stp.StpInterface;
-import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONUtil;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.smart.prod.mbg.auth.util.StpCustomerUtil;
 import com.smart.prod.mbg.auth.util.StpUserUtil;
 import com.smart.prod.mbg.domain.entity.Menu;
@@ -36,7 +35,7 @@ public class StpInterfaceHandler implements StpInterface {
         if (StpUserUtil.getLoginType().equals(loginType)) {
             List<Menu> menuList = roleMenuService.getMenuListByUserId(loginId.toString());
             // 过滤出不为空的权限
-            permissionList = menuList.stream().map(Menu::getPermission).filter(StringUtil::isNotBlank).collect(Collectors.toList());
+            permissionList = menuList.stream().map(Menu::getPermission).filter(Str::isNotBlank).collect(Collectors.toList());
             log.info("[StpInterfaceImpl][getPermissionList] 用户 permissionList:{}", JSONUtil.toJsonStr(permissionList));
         } else if (StpCustomerUtil.getLoginType().equals(loginType)) {
 

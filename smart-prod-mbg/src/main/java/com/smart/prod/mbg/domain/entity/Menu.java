@@ -1,7 +1,7 @@
 package com.smart.prod.mbg.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -106,8 +106,8 @@ public class Menu implements Serializable {
 
     public Map<String, String> getMeta() {
         Map<String, String> map = new HashMap<>();
-        map.put("title", StringUtil.isNotBlank(title) ? title : null);
-        map.put("icon", StringUtil.isNotBlank(icon) ? icon : null);
+        map.put("title", Str.isNotBlank(title) ? title : null);
+        map.put("icon", Str.isNotBlank(icon) ? icon : null);
         return map;
     }
 

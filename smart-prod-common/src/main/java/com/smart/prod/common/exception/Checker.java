@@ -1,7 +1,7 @@
 package com.smart.prod.common.exception;
 
 import cn.hutool.core.collection.CollUtil;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
@@ -157,7 +157,7 @@ public interface Checker {
      */
     static <X extends Exception> void ifEmptyThrow(Object data, Supplier<X> exceptionSupplier) throws X {
         if (data == null
-            || (data instanceof String && StringUtil.isEmpty((CharSequence) data))
+            || (data instanceof String && Str.isEmpty((CharSequence) data))
             || (data instanceof Collection && CollectionUtils.isEmpty((Collection<?>) data))
             || (data instanceof Map && CollectionUtils.isEmpty((Collection<?>) data))) {
             throw exceptionSupplier.get();
@@ -189,7 +189,7 @@ public interface Checker {
      */
     static <X extends Exception> void ifNotEmptyThrow(Object data, Supplier<X> exceptionSupplier) throws X {
         if (data != null
-            || (data instanceof String && StringUtil.isNotEmpty((CharSequence) data))
+            || (data instanceof String && Str.isNotEmpty((CharSequence) data))
             || (data instanceof Collection && CollUtil.isNotEmpty((Collection<?>) data))
             || (data instanceof Map && CollUtil.isNotEmpty((Collection<?>) data))) {
             throw exceptionSupplier.get();
@@ -321,7 +321,7 @@ public interface Checker {
      */
     static <T> boolean ifEmptyThen(T target, Consumer<? super T> consumer) {
         return ifThen(target,
-            t -> Objects.isNull(t) || (t instanceof String && StringUtil.isEmpty((CharSequence) t))
+            t -> Objects.isNull(t) || (t instanceof String && Str.isEmpty((CharSequence) t))
                 || (t instanceof Collection && CollectionUtils.isEmpty((Collection<?>) t))
                 || (t instanceof Map && CollectionUtils.isEmpty((Collection<?>) t)),
             consumer);
@@ -337,7 +337,7 @@ public interface Checker {
      */
     static <T> boolean ifNotEmptyThen(T target, Consumer<? super T> consumer) {
         return ifNotThen(target,
-            t -> Objects.isNull(t) || (t instanceof String && StringUtil.isEmpty((CharSequence) t))
+            t -> Objects.isNull(t) || (t instanceof String && Str.isEmpty((CharSequence) t))
                 || (t instanceof Collection && CollectionUtils.isEmpty((Collection<?>) t))
                 || (t instanceof Map && CollectionUtils.isEmpty((Collection<?>) t)),
             consumer);
@@ -351,7 +351,7 @@ public interface Checker {
      * @return
      */
     static boolean ifStringNotEmpty(String target, Consumer<String> consumer) {
-        return ifThen(target, t -> !StringUtil.isEmpty(t), consumer);
+        return ifThen(target, t -> !Str.isEmpty(t), consumer);
     }
 
     /**
@@ -362,7 +362,7 @@ public interface Checker {
      * @return
      */
     static boolean ifStringEmpty(String target, Consumer<String> consumer) {
-        return ifThen(target, t -> StringUtil.isEmpty(t), consumer);
+        return ifThen(target, t -> Str.isEmpty(t), consumer);
     }
 
     /**

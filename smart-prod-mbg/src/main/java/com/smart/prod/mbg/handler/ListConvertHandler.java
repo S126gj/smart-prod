@@ -2,7 +2,7 @@ package com.smart.prod.mbg.handler;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
@@ -29,7 +29,7 @@ public class ListConvertHandler implements TypeHandler<List<String>> {
     @Override
     public void setParameter(PreparedStatement preparedStatement, int i, List<String> strings, JdbcType jdbcType)
         throws SQLException {
-        preparedStatement.setString(i, StringUtil.convertStr(strings));
+        preparedStatement.setString(i, Str.convertStr(strings));
     }
 
     @Override

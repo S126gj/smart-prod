@@ -12,7 +12,7 @@ import java.util.StringJoiner;
  * @Author: Guoji Shen
  * @Date: 2023/6/5 10:52
  */
-public class StringUtil extends StrUtil {
+public class Str extends StrUtil {
 
 
     /**

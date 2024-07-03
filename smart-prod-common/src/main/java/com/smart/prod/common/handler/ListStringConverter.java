@@ -6,7 +6,7 @@ import com.alibaba.excel.metadata.GlobalConfiguration;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.metadata.data.WriteCellData;
 import com.alibaba.excel.metadata.property.ExcelContentProperty;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 
 import java.util.List;
 
@@ -30,12 +30,12 @@ public class ListStringConverter implements Converter<List> {
     @Override
     public List convertToJavaData(ReadCellData<?> cellData, ExcelContentProperty contentProperty,
         GlobalConfiguration globalConfiguration) {
-        return StringUtil.convertToList(cellData.getStringValue());
+        return Str.convertToList(cellData.getStringValue());
     }
 
     @Override
     public WriteCellData<?> convertToExcelData(List value, ExcelContentProperty contentProperty,
         GlobalConfiguration globalConfiguration) {
-        return new WriteCellData<>(StringUtil.convertStr(value));
+        return new WriteCellData<>(Str.convertStr(value));
     }
 }

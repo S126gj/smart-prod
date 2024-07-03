@@ -33,6 +33,6 @@ public class BaseCriteria implements Serializable {
     }
 
     public LocalDateTime getEndTime() {
-        return CollUtil.isNotEmpty(dateRange) ? LocalDateUtil.parseLocalDateTime(dateRange.get(0)).with(LocalTime.MAX) : null;
+        return CollUtil.isNotEmpty(dateRange) ? LocalDateUtil.parseLocalDateTime(dateRange.get(1)).with(LocalTime.MAX) : null;
     }
 }

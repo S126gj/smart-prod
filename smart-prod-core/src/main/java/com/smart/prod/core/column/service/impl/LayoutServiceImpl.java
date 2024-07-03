@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.smart.prod.common.constanst.CacheKey;
 import com.smart.prod.common.utils.RedisUtils;
-import com.smart.prod.common.utils.StringUtil;
+import com.smart.prod.common.utils.Str;
 import com.smart.prod.mbg.auth.util.StpUserUtil;
 import com.smart.prod.mbg.domain.entity.Role;
 import com.smart.prod.mbg.service.IRoleMenuService;
@@ -50,7 +50,7 @@ public class LayoutServiceImpl extends ServiceImpl<LayoutMapper, Layout> impleme
     private IRoleMenuService roleMenuService;
 
     @Override
-    @Cacheable(key = "#root.target.getKey()")
+    // @Cacheable(key = "#root.target.getKey()")
     public List<LayoutDTO> select() {
         List<LayoutDTO> layoutDTOs = layoutMapping.toDto(baseMapper.selectList(new QueryWrapper()));
         List<LayoutDetailsDTO> layoutDetailsDTOs = layoutDetailsService.queryAllNoDocId();
@@ -65,20 +65,20 @@ public class LayoutServiceImpl extends ServiceImpl<LayoutMapper, Layout> impleme
 
 
     public void parse(LayoutDetailsDTO detailsDto) {
-        List<Role> roleList = roleMenuService.getRoleListByUserId(StpUserUtil.getLoginId().toString());
-        // 根据角色自定义按钮的权限
-        if (StringUtil.isNotBlank(detailsDto.getAuthConfig())) {
-            for (Role role : roleList) {
-                String[] split = detailsDto.getAuthConfig().split(",");
-                for (int i = 0; i < split.length; i++) {
-                    if (role.getId().equals(split[i])) {
-                        detailsDto.setVisible(true);
-                    } else {
-                        detailsDto.setVisible(false);
-                    }
-                }
-            }
-        }
+        // List<Role> roleList = roleMenuService.getRoleListByUserId(StpUserUtil.getLoginId().toString());
+        // // 根据角色自定义按钮的权限
+        // if (Str.isNotBlank(detailsDto.getAuthConfig())) {
+        //     for (Role role : roleList) {
+        //         String[] split = detailsDto.getAuthConfig().split(",");
+        //         for (int i = 0; i < split.length; i++) {
+        //             if (role.getId().equals(split[i])) {
+        //                 detailsDto.setVisible(true);
+        //             } else {
+        //                 detailsDto.setVisible(false);
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     @Override
